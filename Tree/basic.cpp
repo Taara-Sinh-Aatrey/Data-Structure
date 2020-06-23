@@ -1,13 +1,3 @@
-/*
-                                     1
-                    0                               5
-		    3               6                8             2
-	  -4        6       10       11      -2      3     75       63
-*/
-    
-
-
-
 #include<stdio.h>
 #include<stdlib.h>
 
