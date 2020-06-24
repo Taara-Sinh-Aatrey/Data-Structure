@@ -1,29 +1,29 @@
 #include<stdio.h>
-#include<string.h>
 #include<stdlib.h>
+#include<climits>
 
 int min(int a,int b)
 {
 	return (a<b?a:b);
 }
 
-struct Queue
+typedef struct Queue
 {
 	int front,rear,capacity;
 	int* array;
-};
+}Queue;
 
-struct Queue* createQueue(int cap)
+Queue* createQueue(int cap)
 {
-	struct Queue* q;
-	q=(struct Queue *)malloc(sizeof(struct Queue));
+	Queue* q;
+	q=(Queue *)malloc(sizeof(Queue));
 	q->front=q->rear=-1;
 	q->capacity=cap;
 	q->array=(int *)malloc(sizeof(int)*cap);
 	return q;
 }
 
-void enQueue(struct Queue* q,int val)
+void enQueue(Queue* q,int val)
 {
 	if((q->rear+1)%q->capacity==(q->front))
 	{
@@ -36,7 +36,7 @@ void enQueue(struct Queue* q,int val)
 	q->array[q->rear]=val;
 }
 
-int deQueue(struct Queue* q)
+int deQueue(Queue* q)
 {
 	int num;
 	if(q->rear == -1)//when queue is empty
@@ -57,7 +57,7 @@ int deQueue(struct Queue* q)
 	return num;
 }
 
-void display(struct Queue *q)
+void display(Queue *q)
 {
 	/*
 	case 1:(WHEN REAR IS GREATER THAN OR EQUAL TO FRONT):e.g:-front=0,rear=5,capacity=6
@@ -80,12 +80,12 @@ void display(struct Queue *q)
 	printf("%d\n",q->array[q->rear]);
 }
 
-int empty(struct queue *q)
+int empty(Queue *q)
 {
 	return (q->rear == -1);
 }
 
-int full(struct queue *q)
+int full(Queue *q)
 {
 	return (q->rear+1) % q->capacity == (q->front);
 }
@@ -99,37 +99,35 @@ void menu()
 
 int main()
 {
-	struct Queue *q;
-	int cap;
-	printf("Enter the capacity of the queue\n");
-	scanf("%d",&cap);
-	q=createQueue(cap);
+	Queue *q;
+	q=createQueue(100);
 	int num,i;
-	for(i=1;i<=min(cap,5);i++)
+	for(i = 1; i <= 5; i++)
 	enQueue(q,i*i);
-	while(1){
-	menu();
-	printf("Enter your choice\n");
-	int ch;
-	scanf("%d",&ch);
-	switch(ch)
+	while(1)
 	{
-		case 1:
-			printf("Enter the value to insert\n");
-			scanf("%d",&num);
-			enQueue(q,num);
-			break;
-		case 2:
-			num=deQueue(q);
-			if(num!=INT_MIN)
-			printf("The deleted value of the queue is %d\n",num);
-			break;
-		case 3:
-			display(q);
-			break;
-		default:
-			exit(0);
-	}
+		menu();
+		printf("Enter your choice\n");
+		int ch;
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				printf("Enter the value to insert\n");
+				scanf("%d",&num);
+				enQueue(q,num);
+				break;
+			case 2:
+				num=deQueue(q);
+				if(num!=INT_MIN)
+				printf("The deleted value of the queue is %d\n",num);
+				break;
+			case 3:
+				display(q);
+				break;
+			default:
+				exit(0);
+		}
 }
 }
 

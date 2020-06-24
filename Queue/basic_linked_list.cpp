@@ -2,22 +2,22 @@
 #include<stdlib.h>
 #include<climits>
 
-struct queue
+typedef struct queue
 {
 	struct node* head;
-};
+}queue;
 
-struct node
+typedef struct node
 {
 	int info;
 	struct node * link;
-};
+}node;
 
 
-void enQueue(struct queue *q,int val)
+void enQueue(queue *q,int val)
 {
-	struct node *newN, *t;
-	newN = (struct node*)malloc(sizeof(struct node));
+	node *newN, *t;
+	newN = (node*)malloc(sizeof(node));
 	newN->info = val;
 	newN->link = NULL;
 	if(q->head == NULL)
@@ -35,24 +35,24 @@ void enQueue(struct queue *q,int val)
 	}
 }
 
-int deQueue(struct queue *q)
+int deQueue(queue *q)
 {
 	int num;
-	struct node *t=q->head;
+	node *t=q->head;
 	num=q->head->info;
 	q->head=q->head->link;
 	free(t);
 	return num;
 }
 
-int empty(struct queue *q)
+int empty(queue *q)
 {
 	return q->head == NULL;
 }
 
-void display(struct queue *q)
+void display(queue *q)
 {
-	struct node *t=q->head;
+	node *t=q->head;
 	while(t!=NULL)
 	{
 		printf("%d ",t->info);
@@ -70,7 +70,7 @@ void menu()
 
 int main()
 {
-	struct queue q;
+	queue q;
 	q.head=NULL;
 	int num,i;
 	for(i=1;i<=5;i++)

@@ -1,44 +1,44 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node
+typedef struct node
 {
 	int data;
 	struct node *left;
 	struct node *right;
-};
+}node;
 
-struct tree
+typedef struct tree
 {
 	struct node *root;
-};
+}tree;
 
-struct node* create(int val)
+node* create(int val)
 {
-	struct node *temp = (struct node*)malloc(sizeof(struct node));
+	node *temp = (node*)malloc(sizeof(node));
 	temp->data = val;
 	temp->left = NULL;
 	temp->right = NULL;
 	return temp;
 }
 
-struct vector
+typedef struct vector
 {
 	int *arr;
 	int size;
 	int capacity;
-};
+}vector;
 
-struct vector* createVector()
+vector* createVector()
 {
-	struct vector *v = (struct vector*)malloc(sizeof(struct vector));
+	vector *v = (vector*)malloc(sizeof(vector));
 	v->arr = (int *)malloc(sizeof(int)*2);
 	v->size = 0;
 	v->capacity = 2;
 	return v;
 }
 
-void push_back(struct vector *v,int val)
+void push_back(vector *v,int val)
 {
 	if(v->size == v->capacity)
 	{
@@ -49,7 +49,7 @@ void push_back(struct vector *v,int val)
 	v->size++;
 }
 
-void pop_back(struct vector *v)
+void pop_back(vector *v)
 {
 	v->size--;
 	if(v->capacity == 2*v->size)
@@ -59,7 +59,7 @@ void pop_back(struct vector *v)
 	}
 }
 
-int getpath(struct vector *path,struct node* root,int n)
+int getpath(vector *path,node* root,int n)
 {
 	if(!root)
 		return 0;
@@ -78,9 +78,9 @@ int getpath(struct vector *path,struct node* root,int n)
 	return 0;
 }
 
-void findpath(struct node *root,int n1,int n2)
+void findpath(node *root,int n1,int n2)
 {
-	 struct vector *path1,*path2;
+	 vector *path1,*path2;
 	 path1 = createVector();
 	 path2 = createVector();
 	 getpath(path1,root,n1);
@@ -115,8 +115,8 @@ int main()
 	                  0              15
 
 	*/
-	struct tree *T;
-	T=(struct tree *)malloc(sizeof(struct tree));
+	tree *T;
+	T=(tree *)malloc(sizeof(tree));
 	T->root = create(14);
 	T->root->left = create(5);
 	T->root->right = create(7);

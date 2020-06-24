@@ -1,28 +1,28 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node
+typedef struct node
 {
 	int data;
 	struct node *left;
 	struct node *right;
-};
+}node;
 
-struct tree
+typedef struct tree
 {
 	struct node *root;
-};
+}tree;
 
-struct node* create(int val)
+node* create(int val)
 {
-	struct node *temp = (struct node*)malloc(sizeof(struct node));
+	node *temp = (node*)malloc(sizeof(node));
 	temp->data = val;
 	temp->left = NULL;
 	temp->right = NULL;
 	return temp;
 }
 
-void preOrder(struct node *root)
+void preOrder(node *root)
 {
      printf("%d ",root->data);
      if(root->left)
@@ -31,7 +31,7 @@ void preOrder(struct node *root)
      preOrder(root->right);
 }
 
-void inOrder(struct node *root)
+void inOrder(node *root)
 {
 	 if(root->left)
      inOrder(root->left);
@@ -40,7 +40,7 @@ void inOrder(struct node *root)
      inOrder(root->right);
 }
 
-void postOrder(struct node *root)
+void postOrder(node *root)
 {
 	 if(root->left)
      postOrder(root->left);
@@ -51,7 +51,7 @@ void postOrder(struct node *root)
 
 int h = 0;
 
-int calculate_height(struct node* root,int cur)
+int calculate_height(node* root,int cur)
 {
 	if(cur > h)
 		h = cur;
@@ -64,7 +64,7 @@ int calculate_height(struct node* root,int cur)
 
 
 // A function to calculate lowest common ancestor of two nodes
-struct node* lca(struct node *root,int n1,int n2)
+node* lca(node *root,int n1,int n2)
 {
 	if(root == NULL)
 		return NULL;
@@ -72,8 +72,8 @@ struct node* lca(struct node *root,int n1,int n2)
 	if(root->data == n1 || root->data == n2)
 		return root;
 
-	struct node *left_lca = lca(root->left,n1,n2);
-	struct node *right_lca = lca(root->right,n1,n2);
+	node *left_lca = lca(root->left,n1,n2);
+	node *right_lca = lca(root->right,n1,n2);
 
 	if(left_lca && right_lca)
 		return root;
@@ -93,8 +93,8 @@ int main()
 	                  0              15
 
 	*/
-	struct tree *T;
-	T=(struct tree *)malloc(sizeof(struct tree));
+	tree *T;
+	T=(tree *)malloc(sizeof(tree));
 	T->root = create(14);
 	T->root->left = create(5);
 	T->root->right = create(7);

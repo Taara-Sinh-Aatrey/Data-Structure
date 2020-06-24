@@ -2,32 +2,32 @@
 #include<stdlib.h>
 #include<climits>
 
-struct node
+typedef struct node
 {
 	int data;
 	struct node *left;
 	struct node *right;
-};
+}node;
 
-struct tree
+typedef struct tree
 {
 	struct node *root;
-};
+}tree;
 
-struct node* create(int val)
+node* create(int val)
 {
-	struct node *temp = (struct node*)malloc(sizeof(struct node));
+	node *temp = (node*)malloc(sizeof(node));
 	temp->data = val;
 	temp->left = NULL;
 	temp->right = NULL;
 	return temp;
 }
 
-struct node* insert(struct node* root,int val)
+node* insert(node* root,int val)
 {
 	if(root == NULL)
 	{
-		root = (struct node*)malloc(sizeof(struct node));
+		root = (node*)malloc(sizeof(node));
 		root->data = val;
 		root->left = NULL;
 		root->right = NULL;
@@ -45,7 +45,7 @@ struct node* insert(struct node* root,int val)
 	return root;
 }
 
-int FINDMAX(struct node* root,int M)
+int FINDMAX(node* root,int M)
 {
 	if(root->data >= M)
 		M = root->data;
@@ -56,9 +56,9 @@ int FINDMAX(struct node* root,int M)
 	return M;
 }
 
-struct node* Delete(struct node *root,int val)
+node* Delete(node *root,int val)
 {
-	struct node *temp;
+	node *temp;
 	if(root->data == val)
 	{
 		temp = root;
@@ -87,7 +87,7 @@ struct node* Delete(struct node *root,int val)
 	return root;
 }
 
-void inOrder(struct node *root)
+void inOrder(node *root)
 {
 	 if(root->left)
      inOrder(root->left);
@@ -105,8 +105,8 @@ int main()
 	              0       6  9
 
 	*/
-	struct tree *T;
-	T=(struct tree *)malloc(sizeof(struct tree));
+	tree *T;
+	T=(tree *)malloc(sizeof(tree));
 	T->root = NULL;
 	T->root = insert(T->root,14);
 	T->root = insert(T->root,5);
@@ -117,17 +117,17 @@ int main()
 	T->root = insert(T->root,18);
 	T->root = insert(T->root,0);
 	T->root = insert(T->root,15);
-	inOrder(T->root);
+	inOrder(T->root);   printf("\n"); 
 	
 
 	T->root = Delete(T->root,0);
-	inOrder(T->root);
+	inOrder(T->root);   printf("\n");
 
 	T->root = Delete(T->root,18);
-	inOrder(T->root);
+	inOrder(T->root);   printf("\n");
 
 	T->root = Delete(T->root,5);
-	inOrder(T->root);
+	inOrder(T->root);   printf("\n");
 
 
 	return 0;

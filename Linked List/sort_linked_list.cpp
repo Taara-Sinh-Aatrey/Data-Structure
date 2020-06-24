@@ -1,16 +1,16 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node
+typedef struct node
 {
 	int info;
 	struct node* link;
-};
+}node;
 
 //A function to insert data at the beginning of the linked list
-void push_front(struct node **head_ref,int data)
+void push_front(node **head_ref,int data)
 {
-	struct node* new_node=(struct node *)malloc(sizeof(struct node));
+	node* new_node=(node *)malloc(sizeof(node));
 	new_node->info=data;
 	new_node->link=*head_ref;
 	*head_ref=new_node;
@@ -18,7 +18,7 @@ void push_front(struct node **head_ref,int data)
 
 
 //A function to view the linked list
-void display(struct node *head)
+void display(node *head)
 {
 	while(head!=NULL)
 	{
@@ -28,9 +28,9 @@ void display(struct node *head)
 	printf("\n");
 }
 
-void sorting(struct node *head)
+void sorting(node *head)
 {
-	struct node *t1=head,*t2=head;
+	node *t1=head,*t2=head;
 	int temp;
 	while(t1)
 	{
@@ -52,7 +52,7 @@ void sorting(struct node *head)
 
 int main()
 {
-	struct node *head=NULL;
+	node *head=NULL;
     push_front(&head,2);
     push_front(&head,8);
     push_front(&head,3);

@@ -1,30 +1,31 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct List
+typedef struct node
+{
+	int info;
+	struct node* link;
+}node;
+
+typedef struct List
 {
 	struct node *head;
 	struct node *tail;
-};
+}List;
 
-struct List* createList()
+List* createList()
 {
-	struct List *l = (struct List *)malloc(sizeof(struct List));
+	List *l = (List *)malloc(sizeof(List));
 	l->head = NULL;
 	l->tail = NULL;
 	return l;
 }
 
-struct node
-{
-	int info;
-	struct node* link;
-};
 
 //A function to insert data at the beginning of the linked list
-void push_front(struct List *list,int data)
+void push_front(List *list,int data)
 {
-	struct node* new_node=(struct node *)malloc(sizeof(struct node));
+	node* new_node=(node *)malloc(sizeof(node));
 	new_node->info=data;
 	new_node->link=list->head;
 	list->head=new_node;
@@ -33,9 +34,9 @@ void push_front(struct List *list,int data)
 }
 
 //A function to insert data at the end of the linked list
-void push_back(struct List *list,int data)
+void push_back(List *list,int data)
 {
-	struct node* new_node=(struct node *)malloc(sizeof(struct node));
+	node* new_node=(node *)malloc(sizeof(node));
 	new_node->info=data;
 	new_node->link=NULL;
 	if(list->tail == NULL)
@@ -50,9 +51,9 @@ void push_back(struct List *list,int data)
 }
 
 //A function to insert data after a given previous node
-void push_after(struct List *list,struct node *prev_node,int data)
+void push_after(List *list,node *prev_node,int data)
 {
-	struct node* new_node=(struct node *)malloc(sizeof(struct node));
+	node* new_node=(node *)malloc(sizeof(node));
 	new_node->info=data;
 	new_node->link=prev_node->link;
 	prev_node->link=new_node;
@@ -60,11 +61,11 @@ void push_after(struct List *list,struct node *prev_node,int data)
 		list->tail = new_node;
 }
 
-void insert_at(struct List *list,int n,int data)
+void insert_at(List *list,int n,int data)
 {
     if(n==1)
     {
-    	struct node* new_node=(struct node *)malloc(sizeof(struct node));
+    	node* new_node=(node *)malloc(sizeof(node));
 		new_node->info=data;
 		new_node->link=list->head;
 		list->head=new_node;
@@ -73,9 +74,9 @@ void insert_at(struct List *list,int n,int data)
     }
     else
     {
-        struct node* new_node=(struct node *)malloc(sizeof(struct node));
+        node* new_node=(node *)malloc(sizeof(node));
 	    new_node->info=data;
-        struct node *t=list->head;
+        node *t=list->head;
         int i=n-2;
         while(i--&&t!=NULL)
             t=t->link;
@@ -92,9 +93,9 @@ void insert_at(struct List *list,int n,int data)
 }
 
 //A function to delete the beginning node
-void delBeginning(struct List *list)
+void delBeginning(List *list)
 {
-	struct node *t=list->head;
+	node *t=list->head;
 	list->head=list->head->link;
 	if(list->head == NULL)
 		list->tail = NULL;
@@ -102,11 +103,11 @@ void delBeginning(struct List *list)
 }
 
 //A function to delete the laat node
-void delEnd(struct List *list)
+void delEnd(List *list)
 {
 	if(list->tail == NULL)
 		return;
-	struct node *t=list->head,*prev_node=NULL;
+	node *t=list->head,*prev_node=NULL;
 	if(list->head == list->tail)
 	{
 		list->head = list->tail = NULL;
@@ -126,9 +127,9 @@ void delEnd(struct List *list)
 }
 
 //A function to delete the nth node
-void delat(struct List *list,int n)
+void delat(List *list,int n)
 {
-	struct node *t=list->head,*prev_node=NULL;
+	node *t=list->head,*prev_node=NULL;
 	if(n==1)
 	{
 		list->head=list->head->link;
@@ -155,9 +156,9 @@ void delat(struct List *list,int n)
 
 
 //A function to view the linked list
-void viewList(struct List *list)
+void viewList(List *list)
 {
-	struct node *t = list->head;
+	node *t = list->head;
 	while(t!=NULL)
 	{
 		printf("%d ",t->info);
@@ -180,7 +181,7 @@ void menu()
 
 int main()
 {
-	struct List *list = createList(); 
+	List *list = createList(); 
 	int i;
     for(i=0;i<5;i++)
     push_front(list,i);
