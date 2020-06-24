@@ -1,41 +1,40 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct stack
-{
-	struct node* head;
-};
-
-struct node
+typedef struct node
 {
 	int info;
 	struct node * link;
-};
+}node;
 
-
-void push(struct stack *st,int val)
+typedef struct stack
 {
-	struct node *newN;
-	newN=(struct node*)malloc(sizeof(struct node));
+	struct node* head;
+}stack;
+
+void push(stack *st,int val)
+{
+	node *newN;
+	newN=(node*)malloc(sizeof(node));
 	newN->info=val;
 	newN->link=st->head;
 	st->head=newN;
 }
 
-int top(struct stack *st)
+int top(stack *st)
 {
 	return (st->head->info);
 }
 
-void pop(struct stack *st)
+void pop(stack *st)
 {
-	struct node *t;
+	node *t;
 	t=st->head;
 	st->head=st->head->link;
 	free(t);
 }
 
-int empty(struct stack *st)
+int empty(stack *st)
 {
 	if(st->head)
 		return 0;
@@ -51,7 +50,7 @@ void menu()
 
 int main()
 {
-	struct stack st;
+	stack st;
 	st.head=NULL;
 	int num,i;
 	for(i=1;i<=5;i++)

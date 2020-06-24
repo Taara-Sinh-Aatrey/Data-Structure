@@ -2,17 +2,17 @@
 #include<string.h>
 #include<stdlib.h>
 
-struct stack
+typedef struct stack
 {
 	int top;
 	int size;
 	char* arr;
-};
+}stack;
 
-struct stack* createStack(int cap)
+stack* createStack(int cap)
 {
-	struct stack* s;
-	s=(struct stack *)malloc(sizeof(struct stack));
+	stack* s;
+	s=(stack *)malloc(sizeof(stack));
 	s->top=-1;
 	s->size=cap;
 	s->arr=(char *)malloc(sizeof(char)*cap);
@@ -45,7 +45,7 @@ int operatorValue(char ch)
 		return 1;
 }
 
-void push(struct stack *st,char val)
+void push(stack *st,char val)
 {
 	if(st->top==(st->size-1))
 		printf("SORRY!STACK IS FULL\n");
@@ -53,17 +53,17 @@ void push(struct stack *st,char val)
 		st->arr[++st->top]=val;
 }
 
-char top(struct stack *st)
+char top(stack *st)
 {
 	return st->arr[st->top];
 }
 
-void pop(struct stack *st)
+void pop(stack *st)
 {
 	st->top--;
 }
 
-int empty(struct stack *st)
+int empty(stack *st)
 {
 	return st->top == -1;
 }
@@ -85,11 +85,11 @@ char* Reverse(char* A,int l)
 
 int main()
 {
-	struct stack *st=createStack(50);
+	stack *st=createStack(50);
 	char A[50] , B[50];
 	int l,i=0,j=0;
 	char ch;
-	//puts("Enter the infix expression");
+	puts("Enter the infix expression");
 	scanf("%s",A);
 	
 	l=strlen(A);
