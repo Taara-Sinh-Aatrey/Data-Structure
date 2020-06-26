@@ -9,7 +9,7 @@ typedef struct heap
 	int size;
 }heap;
 
-heap* create(int cap)
+heap* createHeap(int cap)
 {
 	heap *h = (heap*)malloc(sizeof(heap));
 	h->arr = (int *)malloc(sizeof(int)*cap);
@@ -39,6 +39,8 @@ void insert(heap *h,int data)
 	}
 }
 
+// A function to delete node having index i
+// so to delete root , we can call this function for index i = 0
 void del(heap* h,int i)
 {
 	h->arr[i] = h->arr[--h->size];
@@ -52,9 +54,13 @@ void del(heap* h,int i)
 			break;
 		if(p1 < h->size && p2 < h->size)
 		{
+			// printf("p1 = %d p2 = %d\n",p1,p2);
 			if(h->arr[p1] > h->arr[p2])
 				p1 = p2;
 		}
+		// printf("p1\n",p1,p2);
+		if(h->arr[i] < h->arr[p1])
+			break;
 		temp = h->arr[p1];
 		h->arr[p1] = h->arr[i];
 		h->arr[i] = temp;
@@ -62,53 +68,32 @@ void del(heap* h,int i)
 	}
 }
 
-void Heap_Sort(heap *h,int res[])
+void Heap_Sort(heap *h,int arr[],int n)
 {
-	int sz = h->size , i = 0;
-	for(i = 0; i < sz; i++)
-	{
-		res[i] = h->arr[0];
-		del(h,0);
-	}
+	// Sorting the array
+	int i = 0;
+    for(i = 0; i < n; i++)
+    {
+    	//storing the value at the root of heap in array
+    	arr[i] = h->arr[0];
+
+    	// Deleting the root of the heap
+    	del(h,0);
+    }
 }
 
 int main()
 {
-	/*
-	             1
-	          3     2
-	        15 5  4   45
-	*/
-	heap *h = create(11);
-	insert(h,3);
-	insert(h,2);
-	insert(h,1);
-	insert(h,15);
-	insert(h,5);
-	insert(h,4);
-	insert(h,45);
+	int arr[9] = {8,4,7,5,11,2,1,10,20};
+	heap *h = createHeap(9);
 	int i = 0;
-	for(i = 0;i < h->size; i++)
-		printf("%d ",h->arr[i]);
-	printf("\n");
+	for(i = 0; i < 9; i++)
+		insert(h,arr[i]);
 
-	del(h,0);
-	/*
-	             2
-	          3     4
-	        15 5  45
-	*/
-	printf("After deleting root\n");
-	for(i = 0;i < h->size; i++)
-		printf("%d ",h->arr[i]);
-	printf("\n");
-    
-    int sz = h->size;
-    int res[sz];
-	Heap_Sort(h,res);
+	Heap_Sort(h,arr,9);
 	printf("Sorted array :-\n");
-	for(i = 0; i < sz; i++)
-		printf("%d ",res[i]);
+	for(i = 0; i < 9; i++)
+		printf("%d ",arr[i]);
 	printf("\n");
 
 
